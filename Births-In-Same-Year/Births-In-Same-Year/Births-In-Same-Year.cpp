@@ -1,20 +1,70 @@
-// Births-In-Same-Year.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+
+using namespace std;
+
+const int MAX_N = 1000000; // 1 million
+
+struct Date
+{
+	int year;
+	int month;
+	int day;
+};
+
+struct BirthsOnDate
+{
+	Date date;
+	int bithsCount;
+};
+
+bool within1Year(Date date1, Date date2)
+{
+	bool result = false;
+	if (date1.year == date2.year)
+	{
+		if (date1.month == date2.month)
+		{
+			if (date1.day <= date2.day)
+			{
+				result = true;
+			}
+		}
+		else if (date1.month <= date2.month)
+		{
+			result = true;
+		}
+	}
+	else if (date1.year + 1 == date2.year)
+	{
+		if (date1.month == date2.month)
+		{
+			if (date1.day > date2.day)
+			{
+				result = true;
+			}
+		}
+		else if (date1.month >= date2.month)
+		{
+			result = true;
+		}
+	}
+	return result;
+}
+
+BirthsOnDate dates[MAX_N];
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; ++i)
+	{
+		cin >> dates[i].date.year >> dates[i].date.month >> dates[i].date.day;
+	}
+
+
+
+	std::cout << "Hello World!\n";
+
+	return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
