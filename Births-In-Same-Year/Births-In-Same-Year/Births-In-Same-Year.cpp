@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <algorithm>    // std::sort
 
 using namespace std;
@@ -20,19 +21,18 @@ struct BirthsOnDate
 
 bool withinOneYear(Date date1, Date date2)
 {
-	bool result = false;
 	if (date1.year == date2.year)
 	{
 		if (date1.month == date2.month)
 		{
 			if (date1.day <= date2.day)
 			{
-				result = true;
+				return true;
 			}
 		}
 		else if (date1.month <= date2.month)
 		{
-			result = true;
+			return true;
 		}
 	}
 	else if (date1.year + 1 == date2.year)
@@ -41,15 +41,15 @@ bool withinOneYear(Date date1, Date date2)
 		{
 			if (date1.day > date2.day)
 			{
-				result = true;
+				return true;
 			}
 		}
 		else if (date1.month >= date2.month)
 		{
-			result = true;
+			return true;
 		}
 	}
-	return result;
+	return false;
 }
 /// <summary>
 /// Treu if date1 is earlyer in time than date2.
@@ -58,36 +58,45 @@ bool withinOneYear(Date date1, Date date2)
 /// <param name="date2">Represents the second date.</param>
 bool compareTwoBirthsOnDate(BirthsOnDate date1, BirthsOnDate date2)
 {
-	bool result;
 	if (date1.date.year != date2.date.year)
 	{
-		result = date1.date.year < date2.date.year;
+		return date1.date.year < date2.date.year;
 	}
 	else if (date1.date.month != date2.date.month)
 	{
-		result = date1.date.month < date2.date.month;
+		return date1.date.month < date2.date.month;
 	}
 	else
 	{
-		result = date1.date.day < date2.date.day;
+		return date1.date.day < date2.date.day;
 	}
-	return result;
 }
 
 BirthsOnDate dates[MAX_N];
 
 int main()
 {
+	ifstream myfile;
+	myfile.open("../Tests/be2.txt");
 	int n;
-	cin >> n;
+	myfile >> n;
 	for (int i = 0; i < n; ++i)
 	{
-		cin >> dates[i].date.year >> dates[i].date.month >> dates[i].date.day;
+		myfile >> dates[i].date.year >> dates[i].date.month >> dates[i].date.day;
 	}
+	myfile.close();
 
 	sort(dates, dates + n, compareTwoBirthsOnDate); // arrays inplicitly converts to the pointer, pointing the first element of the array, dates + n represents the pointer pointing after the last elements place in memory.
 	for (int i = 0; i < n; ++i)
 	{
+		if (i != 0 &&
+			dates[i].date.year == dates[i - 1].date.year &&
+			dates[i].date.month == dates[i - 1].date.month &&
+			dates[i].date.day == dates[i - 1].date.day)
+		{
+			dates[i] = dates[i - 1];
+			continue;
+		}
 		int j = i;
 		while (j < n && withinOneYear(dates[i].date, dates[j].date))
 		{

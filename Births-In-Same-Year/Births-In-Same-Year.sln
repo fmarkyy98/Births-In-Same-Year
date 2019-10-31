@@ -5,6 +5,14 @@ VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Births-In-Same-Year", "Births-In-Same-Year\Births-In-Same-Year.vcxproj", "{B70DB8C8-DAC8-4BFB-A0D4-9E430DB86CEF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{166B1449-336F-4454-872E-4199F0A4A2E5}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\be1.txt = Tests\be1.txt
+		Tests\be2.txt = Tests\be2.txt
+		Tests\ki1.txt = Tests\ki1.txt
+		Tests\ki2.txt = Tests\ki2.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
