@@ -62,14 +62,11 @@ bool compareTwoBirthsOnDate(BirthsOnDate date1, BirthsOnDate date2)
 	{
 		return date1.date.year < date2.date.year;
 	}
-	else if (date1.date.month != date2.date.month)
+	if (date1.date.month != date2.date.month)
 	{
 		return date1.date.month < date2.date.month;
 	}
-	else
-	{
-		return date1.date.day < date2.date.day;
-	}
+	return date1.date.day < date2.date.day;
 }
 
 BirthsOnDate dates[MAX_N];
